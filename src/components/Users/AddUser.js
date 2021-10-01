@@ -5,7 +5,8 @@ import Button from "../UI/Button/Button";
 
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredAge, setEnteredAge] = useState(""); //array destructuring, useState always return an array with exactly two elements
+  const [enteredAge, setEnteredAge] = useState("");
+
   const addUserHandler = (event) => {
     event.preventDefault();
     if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
@@ -14,7 +15,7 @@ const AddUser = (props) => {
     if (+enteredAge < 1) {
       return;
     }
-    console.log(enteredUsername, enteredAge);
+    props.onAddUser(enteredUsername, enteredAge);
     setEnteredUsername("");
     setEnteredAge("");
   };
@@ -30,14 +31,14 @@ const AddUser = (props) => {
   return (
     <Card className={classes.input}>
       <form onSubmit={addUserHandler}>
-        <label htmlFor="username">Uername</label>
+        <label htmlFor="username">Username</label>
         <input
           id="username"
           type="text"
           value={enteredUsername}
           onChange={usernameChangeHandler}
         />
-        <label htmlFor="age">Age (years)</label>
+        <label htmlFor="age">Age (Years)</label>
         <input
           id="age"
           type="number"
